@@ -34,7 +34,7 @@ public class Generatore {
 		String risultato = "";
 		
 		
-		char sesso = (Math.random()>0.5 ? 'm':'f');
+		char sesso = (Math.random()>0.5 ? 'm':'f');//Scelgo il sesso del primo parente, pongo un articolo semplice davanti
 		if (sesso=='m')
 		{
 			risultato+=articoloMaschile+" "+this.parenteleMaschi.get(this.rand.nextInt(parenteleMaschi.size()))+" ";
@@ -44,8 +44,8 @@ public class Generatore {
 			risultato+=this.articoloFemminile+" "+this.parenteleFemmine.get(this.rand.nextInt(this.parenteleFemmine.size()))+" ";
 		}
 		
-		int numeroParenti = (int)(Math.random()*5);
-		for (int i=0; i<numeroParenti;i++)
+		int numeroParenti = (int)(Math.random()*5);//Aggiungo un numero casuale di parenti
+		for (int i=0; i<numeroParenti;i++)//Aggiungo un parente con una preposizione articolata concatenata
 		{
 			sesso = (Math.random()>0.5 ? 'm':'f');
 			if (sesso=='m')
@@ -58,7 +58,7 @@ public class Generatore {
 			}
 		}
 		
-		if (sesso=='m')
+		if (sesso=='m')//Concateno preposizione semplice e il nome della vittima, in base al sesso
 		{
 			risultato+=this.prepSempliceMaschile+" "+this.listaVittimeMaschi.get(this.rand.nextInt(listaVittimeMaschi.size())).toUpperCase()+" ";
 		}
@@ -69,8 +69,8 @@ public class Generatore {
 		
 		//Aggiunta accusa
 		int accusaScelta = rand.nextInt(this.elementiDiIndignazione.size());
-		Integer ammontare = (int) (Math.pow(Math.E, Math.random()*100+50)*10000);
-		String accusaDaConcatenare = String.format(this.elementiDiIndignazione.get(accusaScelta), ammontare.toString());
+		Integer ammontare = (int) (Math.pow(Math.E, Math.random()*100+50)*10000);//Creo un numero casuale di euro
+		String accusaDaConcatenare = String.format(this.elementiDiIndignazione.get(accusaScelta), ammontare.toString());//Sostituisco i %s con il numero di euro
 		
 		risultato+= accusaDaConcatenare;
 		
