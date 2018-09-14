@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Random;
 
 public class Generatore {
-	private List<String> listaVittimeMaschi = new LinkedList<String>( Arrays.asList("Renzie", "Soros", "Razzi", "D'Alema", "Bersani", "Alfano") );
-	private List<String>  listaVittimeFemmine = new LinkedList<>( Arrays.asList("Boldrini", "Kyenge", "Bonino") );
+	private final static List<String> listaVittimeMaschi = new LinkedList<String>( Arrays.asList("Renzie", "$oro$", "D'Alema", "Bersani") );
+	private final static List<String>  listaVittimeFemmine = new LinkedList<>( Arrays.asList("Boldrini", "Kyenge", "Bonino") );
 	
-	private List<String> parenteleMaschi = new LinkedList<>( Arrays.asList("fidanzato","fratello","fratellastro", "cognato", "cugino", "nonno", "nipote", "figlio","trisnonno", "trisavolo") );
-	private List<String>  parenteleFemmine = new LinkedList<>( Arrays.asList("fidanzata","sorella", "cognata", "sorellastra","cugina", "suocera", "nonna", "nipote","figlia", "trisnonna", "trisavola", "sorella") );
+	private final static List<String> parenteleMaschi = new LinkedList<>( Arrays.asList("fidanzato","fratello","fratellastro", "cognato", "cugino", "nonno", "nipote", "figlio","trisnonno", "trisavolo") );
+	private final static List<String>  parenteleFemmine = new LinkedList<>( Arrays.asList("fidanzata","sorella", "cognata", "sorellastra","cugina", "suocera", "nonna", "nipote","figlia", "trisnonna", "trisavola", "sorella") );
+	
+	private final static List<String> listaFinaliCondivisione = new LinkedList<>(Arrays.asList("Kondividi se 6 indinniato", "1 Like = 1€ in meno", "KKOndividi se voui mandarli a casa"));
 	
 	private String preposizioneMaschile = "del";
 	private String prepSempliceMaschile = "di";
@@ -19,7 +21,15 @@ public class Generatore {
 	private String articoloMaschile ="il";
 	private String articoloFemminile = "la";
 	
-	private List<String> elementiDiIndignazione = new LinkedList<>(Arrays.asList("guadagna %s € al giorno per fare il portaborse al Senato", "guadagna %s € sui sacchetti della differenziata", "ha regalato %s € ai migranti con il wifi", "ha tolto %s € alla manutenzione del ponte Morandi", "ha regalato alle banche %s € destinati ai terremotati"));
+	
+	private final static List<String> elementiDiIndignazione = new LinkedList<>(Arrays.asList("guadagna %s € al giorno per fare il portaborse al Senato",
+			"guadagna %s € sui sacchetti della differenziata",
+			"ha regalato %s € ai migranti con il wifi",
+			"ha tolto %s € alla manutenzione del ponte Morandi",
+			"ha regalato alle banche %s € destinati ai terremotati",
+			"ha comprato un aereo da %s € con i nostri soldi",
+			"va sulla Lamborghini da %s € pagata da noi italiani",
+			"fa la cena da %s € a Ibiza con i nostri soldi"));
 	
 	Random rand;
 	
@@ -69,11 +79,15 @@ public class Generatore {
 		
 		//Aggiunta accusa
 		int accusaScelta = rand.nextInt(this.elementiDiIndignazione.size());
-		Integer ammontare = (int) (Math.pow(Math.E, Math.random()*100+50)*10000);//Creo un numero casuale di euro
+		Integer ammontare = (int) ((Math.random()+1)*100000000)
+				;//Creo un numero casuale di euro
 		String accusaDaConcatenare = String.format(this.elementiDiIndignazione.get(accusaScelta), ammontare.toString());//Sostituisco i %s con il numero di euro
 		
 		risultato+= accusaDaConcatenare;
 		
+		
+		//Aggiunta condivisione
+		risultato += "\n\n"+this.listaFinaliCondivisione.get(rand.nextInt(this.listaFinaliCondivisione.size())).toUpperCase();
 		return risultato;
 		
 	}
